@@ -39,5 +39,17 @@ while GAME_IS_ON:
         snake.extend()
         score.increase_score()
 
+    if (snake.head.xcor() > 280 or
+        snake.head.xcor() < -280 or
+        snake.head.ycor() > 280 or
+            snake.head.ycor() < -280):
+        score.game_over()
+        GAME_IS_ON = False
+
+    for snake_elem in snake.snake_elements[1:]:
+        if snake.head.distance(snake_elem) < 10:
+            score.game_over()
+            GAME_IS_ON = False
+
 
 screen.exitonclick()

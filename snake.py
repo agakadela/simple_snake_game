@@ -6,6 +6,7 @@ UP = 90
 DOWN = 270
 LEFT = 180
 RIGHT = 0
+STARTING_POSITIONS = [(0, 0), (-20, 0), (-40, 0)]
 
 
 class Snake():
@@ -19,13 +20,16 @@ class Snake():
 
     def create_snake(self):
         """Create snake object"""
-        for _ in range(3):
-            new_snake = Turtle(shape='square')
-            new_snake.penup()
-            new_snake.color('white')
-            new_snake.setx(self.x_position)
-            self.x_position -= 20
-            self.snake_elements.append(new_snake)
+        for position in STARTING_POSITIONS:
+            self.add_snake_element(position)
+
+    def add_snake_element(self, position):
+        """Add new element to snake"""
+        snake_elem = Turtle('square')
+        snake_elem.color('white')
+        snake_elem.penup()
+        snake_elem.goto(position)
+        self.snake_elements.append(snake_elem)
 
     def move(self, direction):
         """Move snake object"""
@@ -53,9 +57,4 @@ class Snake():
 
     def extend(self):
         """Add new element to snake"""
-        new_snake = Turtle(shape='square')
-        new_snake.penup()
-        new_snake.color('white')
-        new_snake.setx(self.x_position)
-        self.x_position -= 20
-        self.snake_elements.append(new_snake)
+        self.add_snake_element(self.snake_elements[-1].position())
