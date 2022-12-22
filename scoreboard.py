@@ -1,3 +1,4 @@
+"""scoreboard.py module for Scoreboard class"""
 from turtle import Turtle
 
 
